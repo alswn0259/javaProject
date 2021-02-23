@@ -3,6 +3,7 @@ package operators;
 public class CompareOperatorExample1 {
 
 	public static void main(String[] args) {
+		System.out.println("안녕");
 		int num1 = 10;
 		int num2 = 10;
 		boolean result1 = (num1 == num2);
