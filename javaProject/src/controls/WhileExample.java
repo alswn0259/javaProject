@@ -10,6 +10,5 @@ public class WhileExample {
 //			sum = sum + i;
 //			System.out.println("i : " + i + "\t" + "sum : " + sum);
 //		}
-//		많이 쓰는 형태.
 	}
 }
