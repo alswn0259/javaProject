@@ -101,6 +101,7 @@ public class Homework {
 			break;
 }
 		}
+		System.out.println("프로그램 종료.");
 	}
 }
 	
