@@ -20,7 +20,7 @@ public class Homework {
 		
 
 			int menu = scn.nextInt();
-		    if (studentNum != 0 && stuNumber != null && menu <=2) {
+		    if (stuNumber != null && menu <=2) {
 		    	System.out.println("이미 입력했습니다.");
 		    	continue;
 		    	}
