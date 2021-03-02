@@ -1,6 +1,7 @@
 package objects;
 
 public class Cal {
+	//https://reakwon.tistory.com/26
 	public static void main(String[] args) {
 	showInfo("홍길동");
 	showInfo("김길동");
