@@ -27,6 +27,7 @@ public class Member {
 		this.memberName = memberName;
 	}
 
+
 	public void rent(Book book) {
 		for (int i = 0; i < rentBooks.length; i++) {
 			if (rentBooks[i] == null) {
