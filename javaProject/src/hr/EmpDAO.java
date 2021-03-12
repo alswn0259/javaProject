@@ -1,9 +1,14 @@
 package hr;
 
 import java.sql.Connection;// 테이블 열정보
-import java.sql.PreparedStatement; 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 //statement는 sql 질의문장을 string 객체를 전달
 
 public class EmpDAO {
@@ -43,7 +48,58 @@ public class EmpDAO {
 		System.out.println("메소드 호출 완료.");
 		return departments;
 	}
-
+	//배열로 했던거를 Set으로 해보기
+	public Set<Employee> getEmps() {
+		String sql = "select * from emp_java";
+		Set<Employee> list = new HashSet<>();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Employee emp = new Employee();
+				emp.setEmployeeId(rs.getInt("employee_id"));
+				emp.setFirstName(rs.getString("first_name"));
+				emp.setLastName(rs.getString("last_name"));
+				emp.setSalary(rs.getInt("Salary"));
+				list.add(emp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+		return list;
+	}
+	
+	//배열로 했던거를 List로 해보기
+	public List<Employee> getEmpList() {
+		String sql = "select * from emp_java";
+		List<Employee> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rs = null;
+	  try {
+		stmt = conn.createStatement();
+		rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			Employee emp = new Employee();
+			emp.setEmployeeId(rs.getInt("employee_id"));
+			emp.setFirstName(rs.getString("first_name"));
+			emp.setLastName(rs.getString("last_name"));
+			emp.setSalary(rs.getInt("Salary"));
+			list.add(emp);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		DBUtil.close(rs, stmt, conn);
+	}
+	  return list;
+	}
+	
 	public Employee[] empList() {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;// 조회한 결과 받아오도록해줌.

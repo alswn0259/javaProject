@@ -9,6 +9,10 @@ public class Employee {
 	private String hireDate;
 	private String jobId;
 	private int salary;
+	
+	
+	
+	
 	public int getEmployeeId() {
 		return employeeId;
 	}
