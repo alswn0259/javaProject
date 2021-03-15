@@ -1,6 +1,6 @@
 package hr;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
 	private int employeeId; // employee_id
 	private String firstName;
 	private String lastName;
@@ -67,5 +67,8 @@ public class Employee {
 				+ email + ", phoneNumber=" + phoneNumber + ", hireDate=" + hireDate + ", jobId=" + jobId + ", salary="
 				+ salary + "]";
 	}
-	
+	@Override
+	public int compareTo(Employee o) {
+		return this.firstName.compareTo(o.firstName);
+	}
 }

@@ -1,25 +1,68 @@
 package hr;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;// 테이블 열정보
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 //statement는 sql 질의문장을 string 객체를 전달
 
 public class EmpDAO {
 	Connection conn = null;
-
-	EmpDAO() {
-
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "hr";
-		String passwd = "hr";
+//	1)파일읽어오는 방법으로 
+	public EmpDAO() {
+		String path = "config/database.properties";
+		Properties prop = new Properties();
+		FileReader fr = null;
+		try {
+			fr = new FileReader(path);
+			prop.load(fr);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		String url = prop.getProperty("url");
+		String user = prop.getProperty("user");
+		String passwd = prop.getProperty("pass");
+		
+//		2)경로 적어준 방법
+//		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//		String user = "hr";
+//		String passwd = "hr";
 		conn = DBUtil.getConnection(url, user, passwd);
+	}
+	
+	public Map<String, String> getJobList() {
+		String sql = "select * from jobs";
+		Statement stmt = null;
+		ResultSet rs = null;
+		Map<String, String> map = new HashMap<>();
+			
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+			map.put(rs.getString("job_id"), rs.getString("job_title"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+		
+		return map;
 	}
 	
 	public Department[] deptList() {
