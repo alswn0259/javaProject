@@ -6,7 +6,7 @@ import java.util.List;
 public class FlatMapExample {
 	public static void main(String[] args) {
 		List<String> inputList2 = Arrays.asList("10, 20, 30", "40, 50, 60");
-		inputList2.stream()
+		inputList2.stream()  //Stream<String>
 			.flatMapToInt(data -> {
 				String[] strArr = data.split(",");
 				int[] intArr = new int[strArr.length];
@@ -14,7 +14,9 @@ public class FlatMapExample {
 					intArr[i] = Integer.parseInt(strArr[i].trim());
 				}
 				return Arrays.stream(intArr);
-			})
+			})//IntStream
 			.forEach(number -> System.out.println(number));
-}
+
+		
+	}
 }
