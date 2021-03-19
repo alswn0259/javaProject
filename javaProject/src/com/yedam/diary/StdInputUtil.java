@@ -43,6 +43,16 @@ public class StdInputUtil {
 		} while (true);
 		return result;
 	}
+	//단어검색
+	public static String readWord() {
+		String result = "";
+		try {
+			result = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	// 여러줄 입력
 	public static String readMultiLine() {
 		StringBuffer result = new StringBuffer();

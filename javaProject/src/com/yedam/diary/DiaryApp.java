@@ -1,11 +1,13 @@
 package com.yedam.diary;
 
+import java.util.List;
+
 public class DiaryApp {
 		DAO dao;
 		
 		public void start() {
-			dao = new DiaryListDAO(); //파일입출력
-//			dao = new DiaryOracleDAO(); //DB용 입출력
+//			dao = new DiaryListDAO(); //파일입출력
+			dao = new DiaryOracleDAO(); //DB용 입출력
 
 			int menuNum = 0; //do while 한번은 식행되는데 여기 0을 담아줌으로 한번만 실행하고 끝
 			
@@ -51,6 +53,8 @@ public class DiaryApp {
 			case 수정: update(); break;
 			case 삭제: delete(); break;
 			case 전체조회: selectAll(); break;
+			case 날짜검색: selectDate(); break;
+			case 내용검색: selectContent(); break;
 
 			}	
 		}
@@ -101,9 +105,36 @@ public class DiaryApp {
 		public void selectAll() {
 			System.out.println("전체조회>>");
 			for(DiaryVO vo : dao.selectAll()) {
-				System.out.println(vo.getWdate());
-				System.out.println(vo.getContents());
+				print(vo);
 			}
 		}
+		//날짜로 검색
+		public void selectDate() {
+			System.out.println("날짜검색>>");
+			System.out.println("날짜:[yyMMdd]");
+			String wdate = StdInputUtil.readDate();
+			DiaryVO vo = dao.selectDate(wdate); 
+			print(vo);
+			}
+		
+		//내용 검색
+		public void selectContent() {
+			System.out.println("내용검색>>");
+			String wcon = StdInputUtil.readWord();
+			List<DiaryVO> vo = dao.selectContent(wcon);
+			for(DiaryVO co : vo) {
+				print(co);
+			}
+			
+			
+		}
+		//내용 깔끔하게 나오게 하기 위해 만듦.
+		public void print(DiaryVO vo) {
+			System.out.println("날짜는 : " + vo.getWdate());
+			System.out.println("내용은 : " + vo.getContents());
+			System.out.println("------------------------------");
+		}
+		
+		
 		
 }
