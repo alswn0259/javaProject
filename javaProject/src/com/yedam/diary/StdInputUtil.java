@@ -62,7 +62,7 @@ public class StdInputUtil {
 			if(temp.equals("end")) {
 				break;
 			}
-			result.append(temp + "\n");
+			result.append(temp + "\n"); //append 문자열 붙이기
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
