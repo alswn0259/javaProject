@@ -21,7 +21,7 @@ public class DiaryApp {
 		}
 		//메뉴출력
 		private void menuPrint() {
-			Menu[] arr = Menu.values();
+			Menu[] arr = Menu.values(); //value() : 열거타입의 모든 열거객체들을 배열로 만들어 리턴
 			int i = 0;
 			for(Menu menu : arr) { //루핑돌면서 메뉴에 담음
 				System.out.print(String.format("%d:%s ", i, menu.name()));
