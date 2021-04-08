@@ -112,8 +112,8 @@ public class DiaryOracleDAO implements DAO {
 		sql = "delete from diary where dia_date = '" + date + "'";
 		try {
 			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close();
@@ -152,7 +152,7 @@ public class DiaryOracleDAO implements DAO {
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				DiaryVO co = new DiaryVO();
-				co.setWdate(rs.getString("dia_content"));
+				co.setWdate(rs.getString("dia_date"));
 				co.setContents(rs.getString("dia_content"));
 				
 				vo.add(co);
